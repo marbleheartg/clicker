@@ -1,8 +1,8 @@
 import { MINIAPP } from "@/lib/constants"
 import { NextResponse } from "next/server"
 
-const { NEXT_PUBLIC_HOST } = process.env
-if (!NEXT_PUBLIC_HOST) throw new Error("ManifestCredentialsNotConfigured")
+const { NEXT_PUBLIC_HOST, NEXT_PUBLIC_NEYNAR_WEBHOOK_URL } = process.env
+if (!NEXT_PUBLIC_HOST || !NEXT_PUBLIC_NEYNAR_WEBHOOK_URL) throw new Error("ManifestCredentialsNotConfigured")
 
 export async function GET() {
   return NextResponse.json({
@@ -15,8 +15,7 @@ export async function GET() {
       splashBackgroundColor: "#ffffff",
       subtitle: MINIAPP.description,
       description: MINIAPP.description,
-      primaryCategory:
-        "games, social, finance, utility, productivity, health-fitness, news-media, music, shopping, education, developer-tools, entertainment, art-creativity",
+      primaryCategory: MINIAPP.primaryCategory,
       tagline: MINIAPP.description,
       ogTitle: MINIAPP.title,
       ogDescription: MINIAPP.description,
@@ -28,7 +27,7 @@ export async function GET() {
       requiredChains: ["eip155:8453"],
       requiredCapabilities: ["actions.ready"],
       tags: MINIAPP.tags,
-      webhookUrl: MINIAPP.webhookUrl,
+      webhookUrl: NEXT_PUBLIC_NEYNAR_WEBHOOK_URL,
     },
   })
 }

@@ -1,12 +1,10 @@
 const CA = "0x"
 
 const MINIAPP = {
-  title: "title",
-  description: "description",
-  tags: ["1", "2", "3", "4", "5"],
-  primaryCategory:
-    "games, social, finance, utility, productivity, health-fitness, news-media, music, shopping, education, developer-tools, entertainment, art-creativity",
-  webhookUrl: "webhookUrl",
+  title: "clicker",
+  description: "clicker mini app",
+  tags: ["clicker", "clicker", "clicker", "clicker", "clicker"],
+  primaryCategory: "games",
 }
 
 const MINIAPP_METADATA = {
