@@ -10,9 +10,8 @@ import Header from "./components/Header"
 import Menu from "./components/Menu"
 import Claim from "./pages/Claim"
 import Home from "./pages/Home"
-import Promote from "./pages/Promote"
 
-const pngImgSrcs: string[] = []
+const pngImgSrcs: string[] = ["cursor"]
 const svgImgSrcs: string[] = []
 
 export default function App() {
@@ -46,7 +45,6 @@ export default function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Claim />} />
-            <Route path="/promote" element={<Promote />} />
             <Route path="/home" element={<Home />} />
           </Routes>
           <Menu />

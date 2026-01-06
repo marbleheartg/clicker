@@ -10,7 +10,7 @@
 
 @theme {
   --accent: oklch(0 0 0);
-  --bg: oklch(0 0 0);
+  --bg: oklch(0.3568 0.0544 262.95);
   --border: oklch(0 0 0);
   /* --8bit: "8bitoperator JVE", serif; */
 }

@@ -1,16 +1,33 @@
 import sdk from "@farcaster/miniapp-sdk"
 import clsx from "clsx"
 import NextImage from "next/image"
+import { useEffect } from "react"
 import { NavLink } from "react-router"
+import { base } from "viem/chains"
+import { useConnect, useConnectors, useSwitchChain } from "wagmi"
 import { store } from "../../lib/store"
 
 const Header = () => {
   const { user } = store()
 
+  const { mutate: connect } = useConnect()
+  const connectors = useConnectors()
+  const { mutate: switchChain } = useSwitchChain()
+  const session = store.getState().session
+
+  useEffect(() => {
+    try {
+      connect({ connector: connectors[0] })
+    } catch {}
+    try {
+      switchChain({ chainId: base.id })
+    } catch {}
+  }, [session])
+
   return (
     <header className={clsx("fixed top-10 inset-x-9", "flex justify-between items-center")}>
       <div className="w-12">
-        <NextImage className="rounded-full" src={"/images/og/icon.png"} alt="logo" width={48} height={48} priority />
+        <NextImage className="rounded-full" src={"/images/cursor.png"} alt="logo" width={32} height={32} priority />
       </div>
 
       <NavLink

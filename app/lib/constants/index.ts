@@ -1,4 +1,4 @@
-const CA = "0x"
+const CA = "0x5449C69f8C6bc533c25fFb8756770C480B8ea811"
 
 const MINIAPP = {
   title: "clicker",
@@ -18,7 +18,7 @@ const MINIAPP_METADATA = {
       url: `https://${process.env.NEXT_PUBLIC_HOST}`,
       name: MINIAPP.title,
       splashImageUrl: `https://${process.env.NEXT_PUBLIC_HOST}/images/og/splash.png`,
-      splashBackgroundColor: "#ffffff",
+      splashBackgroundColor: "#2d3c59",
     },
   },
 }

@@ -26,24 +26,24 @@ const Menu = () => {
         </svg>
       ),
     },
-    {
-      to: "/promote",
-      icon: (
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect x="2" y="16" width="20" height="4" rx="1.5" fill="none" stroke="currentColor" strokeWidth="2" />
-          <rect x="5" y="6" width="14" height="9" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
-        </svg>
-      ),
-    },
+    // {
+    //   to: "/promote",
+    //   icon: (
+    //     <svg
+    //       width="20"
+    //       height="20"
+    //       viewBox="0 0 24 24"
+    //       fill="none"
+    //       stroke="currentColor"
+    //       strokeWidth="2"
+    //       strokeLinecap="round"
+    //       strokeLinejoin="round"
+    //     >
+    //       <rect x="2" y="16" width="20" height="4" rx="1.5" fill="none" stroke="currentColor" strokeWidth="2" />
+    //       <rect x="5" y="6" width="14" height="9" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+    //     </svg>
+    //   ),
+    // },
     {
       to: "/home",
       icon: (
