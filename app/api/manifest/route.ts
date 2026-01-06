@@ -6,6 +6,11 @@ if (!NEXT_PUBLIC_HOST || !NEXT_PUBLIC_NEYNAR_WEBHOOK_URL) throw new Error("Manif
 
 export async function GET() {
   return NextResponse.json({
+    accountAssociation: {
+      header: "eyJmaWQiOjEwMjEyMTQsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgwZjI2NWYxNUMzQUEyNmFDZkQ1QTZkNDBlQzBBMjBmNTE2NTZDYWQ1In0",
+      payload: "eyJkb21haW4iOiJjbGlja2VyLm1hcmJsZWhlYXJ0Lnh5eiJ9",
+      signature: "3HYsTkkY7HLqPtDdNf16mbcfNZ+lI7049fLevIFLASUvOjfQapbtplC9sLaQTX/hWbWNUe9z6rIDoVbv/n30Qxw=",
+    },
     miniapp: {
       version: "1",
       name: MINIAPP.title,
