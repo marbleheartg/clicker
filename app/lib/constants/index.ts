@@ -5,6 +5,7 @@ const MINIAPP = {
   description: "clicker mini app",
   tags: ["clicker", "clicker", "clicker", "clicker", "clicker"],
   primaryCategory: "games",
+  bgColor: "#2d3c59",
 }
 
 const MINIAPP_METADATA = {
@@ -18,7 +19,7 @@ const MINIAPP_METADATA = {
       url: `https://${process.env.NEXT_PUBLIC_HOST}`,
       name: MINIAPP.title,
       splashImageUrl: `https://${process.env.NEXT_PUBLIC_HOST}/images/og/splash.png`,
-      splashBackgroundColor: "#2d3c59",
+      splashBackgroundColor: MINIAPP.bgColor,
     },
   },
 }

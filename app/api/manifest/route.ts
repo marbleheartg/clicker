@@ -17,7 +17,7 @@ export async function GET() {
       iconUrl: `https://${NEXT_PUBLIC_HOST}/images/og/icon.png`,
       homeUrl: `https://${NEXT_PUBLIC_HOST}`,
       splashImageUrl: `https://${NEXT_PUBLIC_HOST}/images/og/splash.png`,
-      splashBackgroundColor: "#ffffff",
+      splashBackgroundColor: MINIAPP.bgColor,
       subtitle: MINIAPP.description,
       description: MINIAPP.description,
       primaryCategory: MINIAPP.primaryCategory,
