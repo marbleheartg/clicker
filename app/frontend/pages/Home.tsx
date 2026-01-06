@@ -87,7 +87,7 @@ export default function Home() {
                 const isCurrentUser = address.toLowerCase() === userAddress?.toLowerCase()
                 const medalColors = [
                   "bg-(--accent)/30 border-(--accent)/50",
-                  "bg-(--bg)/30 border-(--bg)/50",
+                  "bg-(--accent)/30 border-(--accent)/50",
                   "bg-(--accent)/30 border-(--accent)/50",
                 ]
                 return (
