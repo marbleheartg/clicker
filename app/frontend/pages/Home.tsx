@@ -3,6 +3,7 @@
 import { useReadContractGetClicks, useReadContractGetTopPlayers, useReadContractTotalClicks } from "@/lib/abi"
 import { CA } from "@/lib/constants"
 import clsx from "clsx"
+import React from "react"
 import { useConnection } from "wagmi"
 
 const formatNumber = (num: bigint | undefined) => {
@@ -45,6 +46,31 @@ export default function Home() {
 
   const [topPlayers, topClicks] = topPlayersData || [[], []]
 
+  // Sort players by clicks in descending order
+  const sortedPlayers = React.useMemo((): [`0x${string}`[], bigint[]] => {
+    if (!topPlayers || !topClicks || topPlayers.length === 0) return [[], []]
+
+    // Create array of [address, clicks] pairs
+    const playersWithClicks = topPlayers.map((address, index) => ({
+      address,
+      clicks: topClicks[index] || BigInt(0),
+    }))
+
+    // Sort by clicks descending
+    playersWithClicks.sort((a, b) => {
+      const clicksA = a.clicks
+      const clicksB = b.clicks
+      if (clicksA > clicksB) return -1
+      if (clicksA < clicksB) return 1
+      return 0
+    })
+
+    // Extract sorted arrays
+    return [playersWithClicks.map(p => p.address), playersWithClicks.map(p => p.clicks)]
+  }, [topPlayers, topClicks])
+
+  const [sortedTopPlayers, sortedTopClicks] = sortedPlayers
+
   return (
     <main className="relative">
       {/* Background */}
@@ -78,12 +104,12 @@ export default function Home() {
         </div>
 
         {/* Leaderboard */}
-        {topPlayers && topPlayers.length > 0 && (
+        {sortedTopPlayers && sortedTopPlayers.length > 0 && (
           <div className={clsx("w-full mt-2")}>
             <div className={clsx("text-base font-bold mb-4 text-center uppercase tracking-wider opacity-80")}>leaderboard</div>
             <div className={clsx("flex flex-col gap-2.5")}>
-              {topPlayers.map((address, index) => {
-                const clicks = topClicks[index]
+              {sortedTopPlayers.map((address, index) => {
+                const clicks = sortedTopClicks[index]
                 const isCurrentUser = address.toLowerCase() === userAddress?.toLowerCase()
                 const medalColors = [
                   "bg-(--accent)/30 border-(--accent)/50",

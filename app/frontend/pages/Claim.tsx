@@ -12,6 +12,7 @@ import { CA } from "@/lib/constants"
 import { store } from "@/lib/store"
 import sdk from "@farcaster/miniapp-sdk"
 import clsx from "clsx"
+import React from "react"
 import { useConnection } from "wagmi"
 
 const formatNumber = (num: bigint | undefined) => {
@@ -88,9 +89,36 @@ export default function Claim() {
 
   const [topPlayers, topClicks] = topPlayersData || [[], []]
 
+  // Sort players by clicks in descending order
+  const sortedPlayers = React.useMemo((): [`0x${string}`[], bigint[]] => {
+    if (!topPlayers || !topClicks || topPlayers.length === 0) return [[], []]
+
+    // Create array of [address, clicks] pairs
+    const playersWithClicks = topPlayers.map((address, index) => ({
+      address,
+      clicks: topClicks[index] || BigInt(0),
+    }))
+
+    // Sort by clicks descending
+    playersWithClicks.sort((a, b) => {
+      const clicksA = a.clicks
+      const clicksB = b.clicks
+      if (clicksA > clicksB) return -1
+      if (clicksA < clicksB) return 1
+      return 0
+    })
+
+    // Extract sorted arrays
+    return [playersWithClicks.map(p => p.address), playersWithClicks.map(p => p.clicks)]
+  }, [topPlayers, topClicks])
+
+  const [sortedTopPlayers, sortedTopClicks] = sortedPlayers
+
   // Calculate user's rank
   const userRank =
-    userAddress && topPlayers && topClicks ? topPlayers.findIndex(player => player.toLowerCase() === userAddress.toLowerCase()) + 1 : null
+    userAddress && sortedTopPlayers && sortedTopClicks
+      ? sortedTopPlayers.findIndex(player => player.toLowerCase() === userAddress.toLowerCase()) + 1
+      : null
 
   return (
     <main className="relative">
@@ -160,12 +188,12 @@ export default function Claim() {
         </button>
 
         {/* Leaderboard */}
-        {topPlayers && topPlayers.length > 0 && (
+        {sortedTopPlayers && sortedTopPlayers.length > 0 && (
           <div className={clsx("w-full mt-2")}>
             <div className={clsx("text-sm font-bold mb-3 text-center uppercase tracking-wider opacity-80")}>top players</div>
             <div className={clsx("flex flex-col gap-2")}>
-              {topPlayers.map((address, index) => {
-                const clicks = topClicks[index]
+              {sortedTopPlayers.map((address, index) => {
+                const clicks = sortedTopClicks[index]
                 const isCurrentUser = address.toLowerCase() === userAddress?.toLowerCase()
                 const medalColors = [
                   "bg-(--accent)/30 border-(--accent)/50",
